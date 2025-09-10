@@ -80,6 +80,8 @@ class FunSetSuite extends FunSuite {
 
     val s4 = union(s1, s2)
     val s5 = union(s2, s3)
+
+    val s6 = union(s4, s3)
   }
 
   /**
@@ -130,5 +132,47 @@ class FunSetSuite extends FunSuite {
       assert(!contains(s, 3), "diff 3")
     }
   }
-  
+
+  test("test for filter") {
+    new TestSets {
+      val s = filter(s6, (x: Int) => x % 2 == 1)
+      assert(contains(s, 1), "filt 1")
+      assert(!contains(s, 2), "filt 2")
+      assert(contains(s, 3), "filt 3")
+    }
+  }
+
+  test("test for forall -ver.1") {
+    new TestSets {
+      assert(forall(s6, (x: Int) => x < 4), "forall 1")
+    }
+  }
+
+  test("test for forall -ver.2") {
+    new TestSets {
+      assert(!forall(s6, (x: Int) => 4 % x == 0), "forall 2")
+    }
+  }
+
+  test("test for exists -ver.1") {
+    new TestSets {
+      assert(exists(s6, (x: Int) => x % 3 == 0), "exists 1")
+    }
+  }
+
+  test("test for exists -ver.2") {
+    new TestSets {
+      assert(!exists(s6, (x: Int) => x < 1), "exists 2")
+    }
+  }
+
+  test("test for map") {
+    new TestSets {
+      val s = map(s6, (_ * 10))
+      assert(contains(s, 10), "map 1")
+      assert(contains(s, 20), "map 2")
+      assert(contains(s, 30), "map 3")
+    }
+  }
+
 }

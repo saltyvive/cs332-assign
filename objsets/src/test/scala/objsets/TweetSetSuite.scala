@@ -16,6 +16,10 @@ class TweetSetSuite extends FunSuite {
     val set4c = set3.incl(c)
     val set4d = set3.incl(d)
     val set5 = set4c.incl(d)
+
+    //additional test case
+    val e = new Tweet("A", "A body", 7)
+    val set6 = set5.incl(e)
   }
 
   def asSet(tweets: TweetSet): Set[Tweet] = {
@@ -41,6 +45,12 @@ class TweetSetSuite extends FunSuite {
   test("filter: 20 on set5") {
     new TestSets {
       assert(size(set5.filter(tw => tw.retweets == 20)) === 2)
+    }
+  }
+
+  test("filter: 7 on set6 for left node") {
+    new TestSets {
+      assert(size(set6.filter(tw => tw.retweets == 7)) === 2)
     }
   }
 

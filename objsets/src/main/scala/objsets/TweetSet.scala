@@ -144,9 +144,9 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
   }
 
   def mostRetweeted: Tweet = {
-    val cnt = elem.retweets
-    if (!filter(x => x.retweets > cnt).isInstanceOf[Empty]) filter(x => x.retweets > cnt).mostRetweeted
-    else elem
+    var cnt = elem
+    foreach( tw => if (tw.retweets > cnt.retweets) cnt = tw)
+    cnt
   }
 
 

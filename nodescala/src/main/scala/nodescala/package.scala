@@ -90,7 +90,7 @@ package object nodescala {
      */
     def run()(f: CancellationToken => Future[Unit]): Subscription = {
       val ct = CancellationTokenSource()
-      g(ct.cancellationToken).failed.foreach(_ => ())
+      f(ct.cancellationToken).failed.foreach(_ => ())
       ct
     }
 
